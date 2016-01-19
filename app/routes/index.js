@@ -45,14 +45,13 @@ module.exports = function (app, db) {
         	//res.redirect('/poll/');
         });
     	
-    app.route('/poll/:name/:ptitle')
-    	.get(function (req, res) {
-            res.sendFile(process.cwd() + '/public/poll.html');
-        })
-    	.post(clickHandler.displayPoll);
+    app.route('/date/:sentdate')
+    	.get(clickHandler.returnDate);
         
-    app.route('/api/polls')
-        .get(clickHandler.getPolls);
+    app.route('/date')
+        .get(function (req, res) {
+            res.sendFile(process.cwd() + '/public/date.html');
+        });
         
     app.route('/poll/:name/:ptitle/postpoll')
     	.post(clickHandler.pollVote);

@@ -43,6 +43,20 @@ function clickHandler (db) {
          }
       });
    };
+   
+   this.returnDate = function (req, res) {
+      if (!isNaN(+decodeURI(req.params.sentdate)))
+      {
+         var thingy4 = new Date(+decodeURI(req.params.sentdate));
+         var thingy5 = +decodeURI(req.params.sentdate);
+         res.json({'unix': thingy5, 'natural': thingy4});
+      }
+      else {
+        var thingy2 = new Date(decodeURI(req.params.sentdate).toString());
+        var thingy3 = Date.parse(thingy2);
+        res.json({'unix': thingy3, 'natural': thingy2});
+      }
+   };
 
    this.pollVote = function (req, res) {
    	var answer = req.body.poll.toString();
@@ -189,3 +203,7 @@ function clickHandler (db) {
 }
 
 module.exports = clickHandler;
+
+function isInt(value) {
+  !isNaN(value);
+}
