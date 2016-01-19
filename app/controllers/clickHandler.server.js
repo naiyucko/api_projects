@@ -3,6 +3,7 @@
 function clickHandler (db) {
    var clicks = db.collection('clicks');
 	var usernames = db.collection('usernames');
+	var urlindex = db.collection('urlindex');
 	var polls = db.collection('polls');
    this.getClicks = function (req, res) {
 
@@ -55,6 +56,53 @@ function clickHandler (db) {
         var thingy2 = new Date(decodeURI(req.params.sentdate).toString());
         var thingy3 = Date.parse(thingy2);
         res.json({'unix': thingy3, 'natural': thingy2});
+      }
+   };
+   
+   this.returnShort = function (req, res) {
+      var erryday = parseInt(req.params.urlst);
+      polls.findOne({'short_url': erryday}, function (err, result) {
+         if (err) {
+            throw err;
+         }
+         if (result) {
+         var urlgo = result.original_url;
+         res.redirect(urlgo);
+         }
+         else {
+            res.json({'error': 'That short url does not exist'});
+         }
+      });
+   };
+   
+   this.returnNewShort = function (req, res) {
+      var ayylmao2 = req.params[0];
+      console.log(ayylmao2);
+      var ayylmao = '';
+      if (ayylmao2.startsWith("http")) {
+         urlindex.findOne({'name': 'index'} , function (err, result) {
+            if (err) {
+               throw err;
+            }
+            ayylmao = result.num;
+            var tempob = {'original_url': ayylmao2, 'short_url': ayylmao};
+            polls.insert(tempob, function (err) {
+                  if (err) {
+                     throw err;
+                  }
+                  urlindex.findAndModify({'name': 'index'}, {}, { $inc:  {'num': 1} }, function (err, result) {
+                     if (err) {
+                        throw err;
+                     }
+            
+                     res.json({'original_url': ayylmao2, 'short_url': 'https://api-projects-naiyucko.c9users.io/short/' + ayylmao});
+                  });
+                  
+               });
+         });
+      }
+      else {
+         res.json({'error': 'Invalid URL'});
       }
    };
    

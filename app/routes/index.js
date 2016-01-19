@@ -51,16 +51,15 @@ module.exports = function (app, db) {
             res.sendFile(process.cwd() + '/public/date.html');
         });
         
-    app.route('/poll/:name/:ptitle/postpoll')
-    	.post(clickHandler.pollVote);
+    app.route('/short')
+    	.get(function (req, res) {
+            res.sendFile(process.cwd() + '/public/short.html');
+        });
     	
-  	app.route('/poll/:name/:ptitle/view')
-  		.get(clickHandler.isLogged, function (req, res) {
-            res.sendFile(process.cwd() + '/public/view.html');
-        })
-        .post(clickHandler.viewPoll);
+  	app.route('/short/:urlst')
+  		.get(clickHandler.returnShort);
         
-    app.route('/poll/:name/:ptitle/delete')
-    	.get (clickHandler.deletePoll);
+    app.route(/\/shortnew\/(.+)/)
+    	.get (clickHandler.returnNewShort);
     	
 };
