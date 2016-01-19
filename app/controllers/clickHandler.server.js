@@ -57,6 +57,13 @@ function clickHandler (db) {
         res.json({'unix': thingy3, 'natural': thingy2});
       }
    };
+   
+   this.whoami = function (req, res) {
+      var addr = req.headers['x-forwarded-for'] || req.connection.remoteAddress;
+      var lang = req.headers["accept-language"].split(',')[0];
+      var os = req.headers['user-agent'];
+      res.json({'ipaddress': addr, 'language': lang, 'software': os});
+   };
 
    this.pollVote = function (req, res) {
    	var answer = req.body.poll.toString();

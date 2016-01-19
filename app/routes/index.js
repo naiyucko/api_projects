@@ -40,10 +40,8 @@ module.exports = function (app, db) {
         	res.redirect('/login/');
         });
         
-    app.route('/newpoll')
-    	.post(clickHandler.createPoll, function (req, res) {
-        	//res.redirect('/poll/');
-        });
+    app.route('/whoami')
+    	.get(clickHandler.whoami);
     	
     app.route('/date/:sentdate')
     	.get(clickHandler.returnDate);
