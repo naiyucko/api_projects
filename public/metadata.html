@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+
+<html>
+
+	<head>
+		<title>Voting App</title>
+		
+		<link href="/public/css/main.css" rel="stylesheet" type="text/css">
+	</head>
+
+	<body>
+	<p>
+		This posts to  
+		<a href="https://api-projects-naiyucko.c9users.io/metadata/go">
+			https://api-projects-naiyucko.c9users.io/metadata/go</a>
+		And returns a json response for its size in bytes.
+	</p>
+	<form method="post" enctype="multipart/form-data" action="https://api-projects-naiyucko.c9users.io/metadata/go">
+		<input type="file" name="the-file" />
+		<input type="submit" value="Upload" />
+	</form>
+	<script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+	<script type="text/javascript">
+	/*
+		$(document).ready(function() {
+
+			var files;
+			$('input[type=file]').on('change', function() {
+				files = event.target.files;
+			});
+			$('form').on('submit', function(event) {
+
+				event.stopPropagation();
+				event.preventDefault();
+
+				var data = new FormData();
+				$.each(files, function(key, value) {
+					data.append(key, value);
+				});
+
+				$.ajax({
+					url: 'https://api-projects-naiyucko.c9users.io/metadata/go',
+					type: 'POST',
+					data: data,
+					cache: false,
+					processData: false,
+					contentType: false,
+					error: function(jqXHR, textStatus, errorThrown) {
+						alert('ERRORS: ' + textStatus);
+					},
+					success: function(data) {
+						alert('FILE SIZE: ' + data.fileSize);
+					}
+				});
+			});
+		});
+		*/
+	</script>
+</body>
+
+</html>
