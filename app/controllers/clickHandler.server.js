@@ -75,6 +75,10 @@ function clickHandler (db) {
       });
    };
    
+   this.metadata = function (req, res) {
+      res.json({'fileSize': req.file.size});
+   };
+   
    this.returnNewShort = function (req, res) {
       var ayylmao2 = req.params[0];
       console.log(ayylmao2);

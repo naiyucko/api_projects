@@ -26,18 +26,9 @@ module.exports = function (app, db) {
         })
         .post(clickHandler.loginCheck);
         
-    app.route('/signup')
-    	.get(function (req, res) {
-            res.sendFile(process.cwd() + '/public/signup.html');
-        })
-        .post(clickHandler.addUser, function (req, res) {
-            res.redirect('/login/');
-        });
-        
-    app.route('/logout')
+    app.route('/metadata')
         .get(function (req, res) {
-        	res.clearCookie('username');
-        	res.redirect('/login/');
+            res.sendFile(process.cwd() + '/public/metadata.html');
         });
         
     app.route('/whoami')
